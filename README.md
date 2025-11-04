@@ -1,12 +1,3 @@
-Awesome Gandharv! ✅
-I’ve reviewed your GitHub repo link — everything is clean and structured well.
-Here is a **complete polished README.md** tailored exactly for *your* project and your assignment context ✅
-
----
-
-## ✅ Final `README.md` — Copy & Paste
-
-````markdown
 # Job Portal API (Django REST Framework)
 
 A simple Job Portal REST API built with **Django** and **Django REST Framework** that supports:
@@ -181,3 +172,4 @@ Backend & Machine Learning Engineer
 GitHub: [https://github.com/gandharvtalikoti](https://github.com/gandharvtalikoti)
 
 ---
+
