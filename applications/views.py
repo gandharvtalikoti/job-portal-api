@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.filters import SearchFilter
 from django.shortcuts import get_object_or_404
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 
 from .models import Applicant, Job, Application
@@ -15,7 +15,7 @@ from .serializers import ApplicantSerializer, JobSerializer, ApplicationSerializ
 class ApplicantViewSet(viewsets.ModelViewSet):
     queryset = Applicant.objects.all().order_by('-applied_on')
     serializer_class = ApplicantSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticatedOrReadOnly]
     filter_backends = [SearchFilter]  # enables ?search=
     search_fields = ['name', 'email']  # search by name or email
 
@@ -23,17 +23,17 @@ class ApplicantViewSet(viewsets.ModelViewSet):
 class JobViewSet(viewsets.ModelViewSet):
     queryset = Job.objects.all().order_by('-posted_on')
     serializer_class = JobSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 
 class ApplicationListView(generics.ListAPIView):
     queryset = Application.objects.all().order_by('-applied_on')
     serializer_class = ApplicationSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 
 class ApplicationUpdateView(APIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def patch(self, request, pk):
         app = get_object_or_404(Application, pk=pk)
@@ -45,7 +45,7 @@ class ApplicationUpdateView(APIView):
 
 
 @api_view(['POST'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticatedOrReadOnly])
 def apply_for_job(request):
     """
     POST /api/apply/
