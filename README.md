@@ -270,13 +270,5 @@ Destroying test database for alias 'default'...
 * They verify that main endpoints work with valid JWT authentication.
 * You can expand this file to test more endpoints (Jobs, Applications, etc.) in the future.
 
----
 
-## 👨‍💻 Author
-
-**Gandharv Talikoti**
-Backend Developer | Django & AI Enthusiast
-GitHub: [gandharvtalikoti](https://github.com/gandharvtalikoti)
-
-````
 
