@@ -171,5 +171,112 @@ This project is for educational / assignment purpose only.
 Backend & Machine Learning Engineer
 GitHub: [https://github.com/gandharvtalikoti](https://github.com/gandharvtalikoti)
 
+
+```markdown
+# 🧪 API Testing Guide
+
+This document explains how **basic API tests** are implemented and how to run them for the Job Portal API.
+
 ---
+
+## ✅ Overview
+
+The project includes simple automated API tests written using **Django REST Framework’s built-in testing tools**.
+
+These tests ensure that:
+- The API endpoints are working (GET, POST)
+- Authentication (JWT) works correctly
+- Basic CRUD operations are valid
+
+---
+
+## 📂 Test File Location
+
+```
+
+applications/tests.py
+
+````
+
+---
+
+## ⚙️ Example Test File
+
+```python
+from rest_framework.test import APITestCase
+from rest_framework import status
+from django.urls import reverse
+from django.contrib.auth.models import User
+
+class ApplicantAPITestCase(APITestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(username="admin", password="admin123")
+        response = self.client.post(reverse('token_obtain_pair'), {
+            'username': 'admin',
+            'password': 'admin123'
+        })
+        self.access_token = response.data['access']
+
+    def test_create_applicant(self):
+        url = reverse('applicant-list')
+        data = {"name": "Test User", "email": "test@example.com"}
+        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.access_token}')
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_get_applicants(self):
+        url = reverse('applicant-list')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+````
+
+---
+
+## ▶️ How to Run Tests
+
+Make sure your virtual environment is active:
+
+```bash
+.\.venv\Scripts\activate
+```
+
+Then run:
+
+```bash
+python manage.py test
+```
+
+---
+
+## 🧾 Expected Output
+
+```bash
+Creating test database for alias 'default'...
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.52s
+
+OK
+Destroying test database for alias 'default'...
+```
+
+✅ If you see `OK`, all tests have passed successfully.
+
+---
+
+## 🧩 Notes
+
+* These are **basic API integration tests**, not full unit tests.
+* They verify that main endpoints work with valid JWT authentication.
+* You can expand this file to test more endpoints (Jobs, Applications, etc.) in the future.
+
+---
+
+## 👨‍💻 Author
+
+**Gandharv Talikoti**
+Backend Developer | Django & AI Enthusiast
+GitHub: [gandharvtalikoti](https://github.com/gandharvtalikoti)
+
+````
 
