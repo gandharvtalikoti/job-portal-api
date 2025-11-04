@@ -2,7 +2,6 @@ from rest_framework import serializers
 from .models import Applicant, Job, Application
 
 
-# 1️⃣ Applicant Serializer
 class ApplicantSerializer(serializers.ModelSerializer):
     class Meta:
         model = Applicant
@@ -10,7 +9,6 @@ class ApplicantSerializer(serializers.ModelSerializer):
         read_only_fields = ['id', 'applied_on']  # these are auto-generated, so users can’t edit them
 
 
-# 2️⃣ Job Serializer
 class JobSerializer(serializers.ModelSerializer):
     class Meta:
         model = Job
@@ -18,7 +16,6 @@ class JobSerializer(serializers.ModelSerializer):
         read_only_fields = ['id', 'posted_on']
 
 
-# 3️⃣ Application Serializer
 class ApplicationSerializer(serializers.ModelSerializer):
     applicant = serializers.PrimaryKeyRelatedField(queryset=Applicant.objects.all())
     job = serializers.PrimaryKeyRelatedField(queryset=Job.objects.all())

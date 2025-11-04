@@ -1,7 +1,6 @@
 from django.db import models
 
 
-# 1️⃣ Applicant Model
 class Applicant(models.Model):
     name = models.CharField(max_length=100)  # applicant's full name
     email = models.EmailField(unique=True)   # unique email, acts like an ID
@@ -14,7 +13,6 @@ class Applicant(models.Model):
         return f"{self.name} <{self.email}>"
 
 
-# 2️⃣ Job Model
 class Job(models.Model):
     title = models.CharField(max_length=100)  # job title
     description = models.TextField()          # details about the job
@@ -24,7 +22,6 @@ class Job(models.Model):
         return self.title
 
 
-# 3️⃣ Application Model
 class Application(models.Model):
     # status choices define what phase an application is in
     STATUS_CHOICES = [
